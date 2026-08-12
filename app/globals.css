@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* =========================
+   GLOBAL
+========================= */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: #03030a;
+  color: #ffffff;
+
+  --bs-body-bg: #03030a;
+  --bs-body-color: #ffffff;
+  --bs-heading-color: #ffffff;
+
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar-link {
+  color: white !important;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: #8b5cf6 !important;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 100vh;
+  background: #03030a;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+
+/* Conteneur principal du Hero */
+.hero-content {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+  padding: 0 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+
+/* =========================
+   HERO LEFT
+========================= */
+
+.hero-left {
+  width: 38%;
+}
+
+.hero-left p {
+  margin: 2px 0 12px 0;
+
+  font-size: 1.6rem;
+  color: #8b5cf6;
+}
+
+.hero-left h1 {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+
+  color: white;
+}
+
+
+/* =========================
+   HERO RIGHT
+========================= */
+
+.hero-right {
+  width: 38%;
+  text-align: right;
+}
+
+.hero-right p {
+  margin: 0 0 12px 0;
+
+  font-size: 1.3rem;
+  color: #8b5cf6;
+}
+
+.hero-right h2 {
+  max-width: 600px;
+  margin: 0 0 0 auto;
+
+  white-space: nowrap;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+
+  color: white;
+}
+
+.hero-right span {
+  display: block;
+
+  margin-top: 12px;
+
+  font-size: 1.2rem;
+  color: #8b5cf6;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .hero-content {
+    padding: 120px 25px 50px;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 50px;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-right {
+    text-align: left;
+  }
+
+  .hero-right h2 {
+    margin-left: 0;
+  }
+
+  .hero-left h1 {
+    font-size: clamp(3.5rem, 15vw, 5rem);
+  }
+
+  .hero-right h2 {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+  }
 }
