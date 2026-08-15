@@ -1,0 +1,409 @@
+/* =========================
+   HERO - DESKTOP
+========================= */
+
+.hero {
+  min-height: 100vh;
+  background: #03030a;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+
+/* =========================
+   CONTENU
+========================= */
+
+.heroContent {
+  position: relative;
+
+  width: 100%;
+  max-width: 1400px;
+  height: 100vh;
+
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+
+/* =========================
+   IDENTITE - GAUCHE
+========================= */
+
+.identity {
+  position: absolute;
+
+  left: 60px;
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+
+.identity p {
+  margin: 0 0 12px;
+
+  color: #8b5cf6;
+
+  font-size: 1.2rem;
+}
+
+.identity h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: clamp(4rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Kadir et Ersoy sur deux lignes en desktop */
+
+.identity h1 span {
+  display: block;
+}
+
+
+/* =========================
+   ETUDES - HAUT DROITE
+========================= */
+
+.education {
+  position: absolute;
+
+  top: 23%;
+  right: 60px;
+
+  text-align: right;
+}
+
+.education h2 {
+  margin: 0;
+
+  color: white;
+
+  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.education span {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #8b5cf6;
+
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   JOB - BAS DROITE
+========================= */
+
+.job {
+  position: absolute;
+
+  right: 60px;
+  bottom: 23%;
+
+  text-align: right;
+}
+
+.job h2 {
+  margin: 0;
+
+  color: white;
+
+  font-size: clamp(2.3rem, 3.8vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.job span {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #8b5cf6;
+
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   FUTURE PHOTO
+========================= */
+
+.heroImage {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: 35%;
+  height: 75%;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* ==========================================
+   TABLETTE
+   769px -> 991px
+========================================== */
+
+@media (min-width: 769px) and (max-width: 991px) {
+
+  .heroContent {
+    padding: 0 30px;
+  }
+
+
+  /* Identité */
+
+  .identity {
+    left: 30px;
+  }
+
+  .identity h1 {
+    font-size: clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .identity p {
+    font-size: 1rem;
+  }
+
+
+  /* Etudes */
+
+  .education {
+    top: 21%;
+    right: 30px;
+
+    max-width: 350px;
+  }
+
+  .education h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .education span {
+    font-size: 1rem;
+  }
+
+
+  /* Job */
+
+  .job {
+    right: 30px;
+    bottom: 21%;
+
+    max-width: 350px;
+  }
+
+  .job h2 {
+    font-size: clamp(2.3rem, 5.5vw, 3.4rem);
+
+    /* Software / Engineer sur 2 lignes */
+    white-space: normal;
+  }
+
+  .job span {
+    font-size: 1rem;
+  }
+
+
+  /* Photo */
+
+  .heroImage {
+    width: 38%;
+    height: 70%;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+   <= 768px
+========================================== */
+
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: 100vh;
+  }
+
+
+  /* =========================
+     STRUCTURE
+  ========================= */
+
+  .heroContent {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    padding: 120px 24px 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 38px;
+  }
+
+
+  /* Les blocs ne sont plus positionnés
+     avec top / bottom pour éviter
+     les chevauchements */
+
+  .identity,
+  .education,
+  .job {
+    position: relative;
+
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+
+    width: 62%;
+
+    transform: none;
+
+    text-align: left;
+
+    z-index: 2;
+  }
+
+
+  /* =========================
+     IDENTITE
+  ========================= */
+
+  .identity p {
+    display: block;
+
+    margin: 0 0 8px;
+
+    color: #8b5cf6;
+
+    font-size: clamp(0.95rem, 4vw, 1.1rem);
+    line-height: 1;
+  }
+
+  .identity h1 {
+    margin: 0;
+
+    color: white;
+
+    font-size: clamp(2.3rem, 9vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+
+  /* Kadir + Ersoy sur la même ligne */
+
+  .identity h1 span {
+    display: inline;
+  }
+
+  .identity h1 span + span {
+    margin-left: 8px;
+  }
+
+
+  /* =========================
+     ETUDES
+  ========================= */
+
+  .education h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: clamp(1.8rem, 7.5vw, 2.7rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .education span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #8b5cf6;
+
+    font-size: clamp(0.95rem, 4vw, 1.1rem);
+  }
+
+
+  /* =========================
+     JOB
+  ========================= */
+
+  .job {
+    width: 70%;
+  }
+
+  .job h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: clamp(1.8rem, 7.5vw, 2.7rem);
+    font-weight: 700;
+    line-height: 1.05;
+
+    white-space: nowrap;
+  }
+
+  .job span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #8b5cf6;
+
+    font-size: clamp(0.95rem, 4vw, 1.1rem);
+  }
+
+
+  /* =========================
+     PHOTO
+  ========================= */
+
+  .heroImage {
+    position: absolute;
+
+    top: 20%;
+    right: -10px;
+    left: auto;
+    bottom: auto;
+
+    width: 42%;
+    height: 65%;
+
+    transform: none;
+
+    pointer-events: none;
+
+    z-index: 1;
+  }
+}
