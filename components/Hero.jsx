@@ -1,4 +1,5 @@
 import styles from "./Hero.module.css";
+import BlurText from "./BlurText";
 
 export const Hero = () => {
   return (
@@ -9,10 +10,14 @@ export const Hero = () => {
         <div className={styles.identity}>
           <p>Hello, I'm</p>
 
-          <h1>
-            <span>Kadir</span>
-            <span>Ersoy</span>
-          </h1>
+          <BlurText
+            as="h1"
+            text="Kadir Ersoy"
+            animateBy="words"
+            direction="top"
+            delay={150}
+            className={styles.identityTitle}
+          />
         </div>
 
         {/* Photo */}
