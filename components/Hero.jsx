@@ -5,6 +5,7 @@ export const Hero = () => {
     <section id="home" className={styles.hero}>
       <div className={styles.heroContent}>
 
+        {/* Identité */}
         <div className={styles.identity}>
           <p>Hello, I'm</p>
 
@@ -14,25 +15,27 @@ export const Hero = () => {
           </h1>
         </div>
 
-
-        <div className={styles.education}>
-          <h2>Computer Engineering Student</h2>
-
-          <span>at ESIEE Paris</span>
-        </div>
-
-
-        <div className={styles.job}>
-          <h2>Software Engineer</h2>
-
-          <span>at Brasserie Champigneulles</span>
-        </div>
-
-
+        {/* Photo */}
         <div className={styles.heroImage}>
-          {/* Ta photo arrivera ici */}
+          <img src="/images/test.png" alt="Kadir Ersoy" />
         </div>
 
+        {/*Hero right content */}
+        <div className={styles.rightContent}>
+
+          {/* Formation */}
+          <div className={styles.education}>
+            <h2>Computer Engineering Student</h2>
+            <span>at ESIEE Paris</span>
+          </div>
+
+          {/* Poste */}
+          <div className={styles.job}>
+            <h2>Software Engineer</h2>
+            <span>at Brasserie Champigneulles</span>
+          </div>
+
+        </div>
       </div>
     </section>
   );

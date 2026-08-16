@@ -1,3 +1,7 @@
+/* =========================
+   Desktop
+========================= */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -122,9 +126,7 @@
   }
 
 
-  /* =========================
-     HAMBURGER
-  ========================= */
+  /* HAMBURGER */
 
   .toggle {
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -140,9 +142,7 @@
   }
 
 
-  /* =========================
-     MENU OUVERT
-  ========================= */
+  /* MENU OUVERT */
 
   .navbar :global(.navbar-collapse) {
     position: absolute;
@@ -167,9 +167,7 @@
   }
 
 
-  /* =========================
-     LIENS
-  ========================= */
+  /* LIENS */
 
   .navLinks {
     margin: 0;
@@ -193,9 +191,7 @@
   }
 
 
-  /* =========================
-     RESEAUX
-  ========================= */
+  /* RESEAUX */
 
   .socials {
     margin-top: 18px;
