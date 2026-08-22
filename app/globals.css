@@ -12,3 +12,11 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}

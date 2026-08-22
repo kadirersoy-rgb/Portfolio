@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+
+        {/* Curseur personnalisé */}
+        <CustomCursor />
+
+        {/* Contenu du site */}
+        {children}
+
+        </body>
     </html>
   );
 }

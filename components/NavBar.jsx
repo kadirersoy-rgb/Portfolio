@@ -31,6 +31,7 @@ export const NavBar = () => {
     <Navbar
       expand="lg"
       className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
+      data-cursor="dot-only"
     >
       <Container>
 

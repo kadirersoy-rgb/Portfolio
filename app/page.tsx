@@ -6,6 +6,13 @@ export default function Home() {
     <>
       <NavBar />
       <Hero />
+      {/* Temporaire pour tester le scroll */}
+      <div
+        style={{
+          height: "150vh",
+          background: "#111",
+        }}
+      />
     </>
   );
 }
