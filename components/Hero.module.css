@@ -5,14 +5,12 @@
 .hero {
   position: relative;
 
-  /* Donne de la distance au scroll */
-  height: 130vh;
+  min-height: 100vh;
 
-  background: #03030a;
+  background: transparent;
 
-  z-index: 1;
+  overflow: hidden;
 }
-
 
 /* Hero content */
 

@@ -1,0 +1,143 @@
+/* ==========================================================
+   DECORATIVE IMAGE
+========================================================== */
+
+.decorativeImage {
+  position: relative;
+
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3 / 4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==========================================================
+   CADRES DÉCORATIFS
+========================================================== */
+
+/* Cadre arrière gauche */
+
+.frame1 {
+  position: absolute;
+
+  width: 88%;
+  height: 92%;
+
+  border: 2px solid #8b5cf6;
+  border-radius: 22px;
+
+  transform: rotate(-12deg);
+
+  opacity: 0.8;
+
+  box-shadow:
+    0 0 15px rgba(139, 92, 246, 0.25);
+
+  z-index: 0;
+
+  transition: transform 0.5s ease;
+}
+
+
+/* Cadre arrière droit */
+
+.frame2 {
+  position: absolute;
+
+  width: 88%;
+  height: 92%;
+
+  border: 2px solid rgba(139, 92, 246, 0.65);
+  border-radius: 22px;
+
+  transform: rotate(9deg);
+
+  opacity: 0.7;
+
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.2);
+
+  z-index: 0;
+
+  transition: transform 0.5s ease;
+}
+
+
+/* ==========================================================
+   PHOTO
+========================================================== */
+
+.imageContainer {
+  position: relative;
+
+  width: 88%;
+  height: 92%;
+
+  overflow: hidden;
+
+  background: #080812;
+
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(139, 92, 246, 0.12);
+
+  z-index: 1;
+}
+
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.6s ease;
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.decorativeImage:hover .frame1 {
+  transform: rotate(-15deg) scale(1.02);
+}
+
+.decorativeImage:hover .frame2 {
+  transform: rotate(12deg) scale(1.02);
+}
+
+.decorativeImage:hover .imageContainer img {
+  transform: scale(1.025);
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .decorativeImage {
+    max-width: 280px;
+  }
+
+  .frame1 {
+    transform: rotate(-9deg);
+  }
+
+  .frame2 {
+    transform: rotate(7deg);
+  }
+
+}

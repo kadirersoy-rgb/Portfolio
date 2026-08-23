@@ -1,0 +1,413 @@
+/* ==========================================================
+   ABOUT
+========================================================== */
+
+.about {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  background: transparent;
+
+    /* Le scroll se cale au début de About */
+  scroll-snap-align: start;
+
+  /* Évite que la navbar cache le haut de About */
+  scroll-margin-top: 80px;
+
+  overflow: visible;
+}
+
+/* Halo de séparation */
+
+.about::before {
+  content: "";
+
+  position: absolute;
+
+  top: -90px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 90%;
+  height: 280px;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(139, 92, 246, 0.5) 0%,
+    rgba(109, 40, 217, 0.22) 28%,
+    rgba(76, 29, 149, 0.1) 50%,
+    transparent 75%
+  );
+
+  filter: blur(45px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+/* ==========================================================
+   CONTENU PRINCIPAL
+========================================================== */
+
+.aboutContent {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+  padding: 120px 60px 80px;
+
+  display: grid;
+  grid-template-columns: 38% 62%;
+  align-items: center;
+
+  gap: 60px;
+
+  z-index: 1;
+}
+
+
+/* ==========================================================
+   PARTIE GAUCHE
+========================================================== */
+
+.aboutImage {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==========================================================
+   PARTIE DROITE
+========================================================== */
+
+.aboutInfo {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ==========================================================
+   TITRE
+========================================================== */
+
+.aboutTitle {
+  margin: 0 0 45px;
+
+  color: white;
+
+  font-size: clamp(3.5rem, 5vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -3px;
+}
+
+.aboutTitle span {
+  color: #8b5cf6;
+}
+
+
+/* ==========================================================
+   ONGLETS
+========================================================== */
+
+.aboutTabs {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  margin-bottom: 30px;
+}
+
+
+.aboutTabs button {
+  position: relative;
+
+  flex: 1;
+
+  padding: 15px 10px 18px;
+
+  background: transparent;
+
+  border: none;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  cursor: none;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.aboutTabs button:hover {
+  color: white;
+}
+
+
+/* Onglet sélectionné */
+
+.aboutTabs .activeTab {
+  color: #a78bfa;
+}
+
+
+/* Trait violet sous l'onglet sélectionné */
+
+.aboutTabs .activeTab::after {
+  content: "";
+
+  position: absolute;
+
+  left: 15%;
+  bottom: -1px;
+
+  width: 70%;
+  height: 2px;
+
+  background: #8b5cf6;
+
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 0.7);
+}
+
+
+/* ==========================================================
+   CONTENU DE L'ONGLET
+========================================================== */
+
+.aboutTabContent {
+  width: 100%;
+  min-height: 350px;
+
+  padding: 35px;
+
+  background: rgba(8, 8, 18, 0.6);
+
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+
+/* Titre du contenu */
+
+.aboutTabContent h3 {
+  margin: 0 0 22px;
+
+  color: white;
+
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 600;
+}
+
+
+/* Paragraphes */
+
+.aboutTabContent p {
+  max-width: 750px;
+
+  margin: 0 0 18px;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+
+/* Dernier paragraphe */
+
+.aboutTabContent p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Texte important */
+
+.aboutTabContent strong {
+  color: #a78bfa;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================================
+   TABLETTE
+   769px -> 991px
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 991px) {
+
+  .aboutContent {
+    padding: 110px 30px 70px;
+
+    grid-template-columns: 35% 65%;
+
+    gap: 35px;
+  }
+
+
+  /* Titre */
+
+  .aboutTitle {
+    margin-bottom: 35px;
+
+    font-size: clamp(3rem, 6vw, 4.5rem);
+  }
+
+
+  /* Onglets */
+
+  .aboutTabs button {
+    padding: 13px 5px 16px;
+
+    font-size: 0.9rem;
+  }
+
+
+  /* Contenu */
+
+  .aboutTabContent {
+    min-height: 320px;
+
+    padding: 28px;
+  }
+
+  .aboutTabContent p {
+    font-size: 0.95rem;
+  }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   <= 768px
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .about {
+    min-height: auto;
+  }
+
+
+  /* Structure */
+
+  .aboutContent {
+    padding: 100px 22px 70px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 60px;
+  }
+
+
+  /* Photo */
+
+  .aboutImage {
+    order: 1;
+  }
+
+
+  /* Informations */
+
+  .aboutInfo {
+    order: 2;
+  }
+
+
+  /* Titre */
+
+  .aboutTitle {
+    margin-bottom: 35px;
+
+    font-size: clamp(3rem, 15vw, 4.5rem);
+
+    letter-spacing: -2px;
+  }
+
+
+  /* Onglets */
+
+  .aboutTabs {
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    gap: 25px;
+
+    scrollbar-width: none;
+  }
+
+  .aboutTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .aboutTabs button {
+    flex: none;
+
+    padding: 12px 2px 16px;
+
+    white-space: nowrap;
+
+    font-size: 0.95rem;
+  }
+
+
+  /* Trait actif */
+
+  .aboutTabs .activeTab::after {
+    left: 0;
+
+    width: 100%;
+  }
+
+
+  /* Contenu */
+
+  .aboutTabContent {
+    min-height: 330px;
+
+    padding: 25px 22px;
+
+    border-radius: 18px;
+  }
+
+  .aboutTabContent h3 {
+    font-size: 1.7rem;
+  }
+
+  .aboutTabContent p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+}
