@@ -5,20 +5,27 @@
 .about {
   position: relative;
 
-  min-height: 100vh;
+  background: transparent;
+
+  scroll-snap-align: start;
+  scroll-margin-top: 80px;
+}
+
+
+/* ==========================================================
+   VIEWPORT PIN
+========================================================== */
+
+.aboutViewport {
+  position: relative;
+
+  width: 100%;
+  height: calc(100vh - 80px);
+
+  overflow: hidden;
 
   display: flex;
   align-items: center;
-
-  background: transparent;
-
-    /* Le scroll se cale au début de About */
-  scroll-snap-align: start;
-
-  /* Évite que la navbar cache le haut de About */
-  scroll-margin-top: 80px;
-
-  overflow: visible;
 }
 
 /* Halo de séparation */
