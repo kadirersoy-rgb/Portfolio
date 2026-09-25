@@ -9,6 +9,8 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import styles from "./About.module.css";
 import { DecorativeImage } from "./DecorativeImage";
 import { StarBackground } from "./StarBackground";
+import { FaGraduationCap } from "react-icons/fa";
+import { FiBriefcase, FiZap, FiCompass, FiUsers, FiTool, FiCpu, FiActivity, FiGlobe } from "react-icons/fi";
 
 
 /* ==========================================================
@@ -27,6 +29,11 @@ const tabs = [
 
       "J’aime comprendre, résoudre des problèmes et créer des solutions concrètes. Curieux et motivé, je cherche continuellement à découvrir de nouvelles technologies et à relever de nouveaux défis.",
     ],
+    cards: [
+      { title: "ESIEE Paris", text: "Étudiant en informatique", icon: FaGraduationCap },
+      { title: "Software Engineer", text: "Brasserie Champigneulles", icon: FiBriefcase },
+      { title: "Curieux & motivé", text: "Toujours en quête de défis", icon: FiZap },
+    ],
   },
 
   {
@@ -35,19 +42,22 @@ const tabs = [
 
     title: "Langues",
 
-    paragraphs: [
-      "Les langues me permettent d’échanger, de découvrir et d’évoluer dans des environnements différents.",
-    ],
-
     cards: [
       {
         title: "Français",
         text: "Langue maternelle",
+        flag: "fr",
       },
 
       {
         title: "Anglais",
         text: "Niveau professionnel",
+        flag: "gb",
+      },
+      {
+        title: "Turc",
+        text: "Bilingue",
+        flag: "tr",
       },
     ],
   },
@@ -58,24 +68,23 @@ const tabs = [
 
     title: "Ma façon de travailler.",
 
-    paragraphs: [
-      "Au-delà du développement, j’accorde beaucoup d’importance à la curiosité, à l’échange et à la recherche de solutions.",
-    ],
-
     cards: [
       {
         title: "Curiosité",
         text: "Comprendre, explorer et apprendre en continu.",
+        icon: FiCompass,
       },
 
       {
         title: "Esprit d’équipe",
         text: "Partager, collaborer et avancer ensemble.",
+        icon: FiUsers,
       },
 
       {
         title: "Résolution de problèmes",
         text: "Analyser pour construire une réponse concrète.",
+        icon: FiTool,
       },
     ],
   },
@@ -86,29 +95,51 @@ const tabs = [
 
     title: "Ce qui m’inspire.",
 
-    paragraphs: [
-      "Ma curiosité continue aussi en dehors de l’informatique.",
-    ],
-
     cards: [
       {
         title: "Technologie",
         text: "Découvrir de nouvelles possibilités.",
+        icon: FiCpu,
       },
 
       {
         title: "Sport",
         text: "Me dépasser et garder un équilibre.",
+        icon: FiActivity,
       },
 
       {
         title: "Voyages",
         text: "Explorer et changer de perspective.",
+        icon: FiGlobe,
       },
     ],
   },
 ];
 
+
+const LanguageFlag = ({ country }) => (
+  <svg className={styles.languageFlag} viewBox="0 0 60 40" aria-hidden="true" focusable="false">
+    {country === "fr" && <>
+      <path fill="#fff" d="M0 0h60v40H0z" />
+      <path fill="#002395" d="M0 0h20v40H0z" />
+      <path fill="#ed2939" d="M40 0h20v40H40z" />
+    </>}
+    {country === "gb" && <>
+      <path fill="#012169" d="M0 0h60v40H0z" />
+      <path stroke="#fff" strokeWidth="9" d="m0 0 60 40M60 0 0 40" />
+      <path stroke="#c8102e" strokeWidth="3" d="m0 0 60 40M60 0 0 40" />
+      <path stroke="#fff" strokeWidth="13" d="M30 0v40M0 20h60" />
+      <path stroke="#c8102e" strokeWidth="7" d="M30 0v40M0 20h60" />
+    </>}
+    {country === "tr" && <>
+      <path fill="#e30a17" d="M0 0h60v40H0z" />
+      <circle cx="25" cy="20" r="10" fill="#fff" />
+      <circle cx="28" cy="20" r="8" fill="#e30a17" />
+      <path fill="#fff" d="m39 14 1.4 4.2h4.4l-3.6 2.6 1.4 4.2-3.6-2.6-3.6 2.6 1.4-4.2-3.6-2.6h4.4z" />
+    </>}
+  </svg>
+);
 
 export const About = () => {
 
@@ -412,6 +443,10 @@ export const About = () => {
               className={styles.aboutTabContent}
             >
 
+              <p className={styles.cardEyebrow}>
+                {String(activeIndex + 1).padStart(2, "0")} — {activeTab.label}
+              </p>
+
               <h3>
                 {activeTab.title}
               </h3>
@@ -452,10 +487,18 @@ export const About = () => {
                       <div
                         key={card.title}
                         className={
-                          styles.infoCard
+                          `${styles.infoCard} ${activeTab.id === "presentation" ? styles.presentationCard : styles.bubbleCard}`
                         }
                       >
 
+                        {card.flag && <LanguageFlag country={card.flag} />}
+                        {card.icon && (
+                          <span className={styles.cardIcon} aria-hidden="true">
+                            <card.icon />
+                          </span>
+                        )}
+
+                        <div>
                         <h4>
                           {card.title}
                         </h4>
@@ -463,6 +506,7 @@ export const About = () => {
                         <p>
                           {card.text}
                         </p>
+                        </div>
 
                       </div>
 

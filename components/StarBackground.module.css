@@ -21,10 +21,87 @@
   inset: -15%;
   background:
     radial-gradient(ellipse at 38% 48%, rgba(186, 164, 255, 0.1), transparent 32%),
-    radial-gradient(ellipse at 65% 55%, rgba(92, 130, 222, 0.09), transparent 35%),
-    linear-gradient(153deg, transparent 32%, rgba(109, 76, 177, 0.06) 42%, rgba(163, 144, 225, 0.11) 49%, rgba(67, 100, 175, 0.06) 56%, transparent 66%);
+    radial-gradient(ellipse at 65% 55%, rgba(119, 42, 255, 0.09), transparent 35%),
+    linear-gradient(153deg, transparent 32%, rgba(109, 40, 217, 0.06) 42%, rgba(185, 133, 255, 0.11) 49%, rgba(78, 22, 166, 0.06) 56%, transparent 66%);
   filter: blur(24px);
   animation: galaxyDrift 32s ease-in-out infinite alternate;
+}
+
+/* A decorative planetary system, shared by Hero and About. */
+.solarSystem {
+  position: absolute;
+  left: 43%;
+  top: 28%;
+  width: min(115vw, 1600px);
+  height: clamp(360px, 48vw, 680px);
+  transform: translate(-50%, -50%) rotate(-18deg);
+  opacity: 0.8;
+}
+
+.sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(42px, 5vw, 76px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fff5ff, #dec1ff 24%, #a45aff 55%, #6821bc 82%);
+  box-shadow: 0 0 22px #b578ff80, 0 0 70px #8737ff66, 0 0 150px #6512ed40;
+  animation: solarPulse 9s ease-in-out infinite alternate;
+}
+
+.sun::before {
+  content: "";
+  position: absolute;
+  inset: -160%;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 22%, #a56aff15 28%, transparent 60%);
+}
+
+.orbit {
+  position: absolute;
+  inset: var(--orbit-inset);
+  border: 1px solid rgba(185, 133, 255, 0.16);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.025);
+}
+
+.planet {
+  position: absolute;
+  width: var(--planet-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #ded4f1, #8a739f 28%, #30203e 60%, #080610 82%);
+  box-shadow: inset 1px 1px 2px #e7d4ff55, 3px 5px 12px #0008;
+  offset-path: ellipse(50% 50% at 50% 50%);
+  offset-rotate: 0deg;
+  animation: planetaryOrbit var(--orbit-duration) linear var(--orbit-delay) infinite;
+}
+
+.ringedPlanet {
+  background: radial-gradient(circle at 30% 25%, #eed8c3, #a08492 30%, #493248 58%, #0d0815 85%);
+}
+
+.ringedPlanet::after {
+  content: "";
+  position: absolute;
+  inset: 28% -45%;
+  border: 4px solid rgba(201, 177, 222, 0.4);
+  border-top-color: rgba(201, 177, 222, 0.15);
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  box-shadow: 0 0 0 2px rgba(185, 133, 255, 0.1);
+}
+
+@keyframes planetaryOrbit {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@keyframes solarPulse {
+  from { opacity: 0.75; }
+  to { opacity: 1; }
 }
 
 @keyframes galaxyDrift {
@@ -66,7 +143,7 @@
   animation-delay: -12s;
   background: radial-gradient(
     circle,
-    rgba(96, 165, 250, 0.18) 0%,
+    rgba(119, 42, 255, 0.18) 0%,
     rgba(139, 92, 246, 0.12) 42%,
     transparent 72%
   );
@@ -81,7 +158,7 @@
   background: radial-gradient(
     circle,
     rgba(168, 85, 247, 0.16) 0%,
-    rgba(59, 130, 246, 0.08) 40%,
+    rgba(78, 22, 166, 0.08) 40%,
     transparent 74%
   );
 }
@@ -306,12 +383,18 @@
 }
 
 @media (max-width: 640px) {
+  .solarSystem { width: 170vw; opacity: 0.6; }
   .galaxyBand { opacity: 0.7; }
   .nebula { filter: blur(45px); }
   .smallStar:nth-child(3n) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .planet { animation: none; offset-distance: 32%; }
+  .orbit:nth-child(3) .planet { offset-distance: 64%; }
+  .orbit:nth-child(4) .planet { offset-distance: 85%; }
+  .orbit:nth-child(5) .planet { offset-distance: 12%; }
+  .sun { animation: none; }
   .starsWrap { transition: none; }
   .galaxyBand,
   .nebula,

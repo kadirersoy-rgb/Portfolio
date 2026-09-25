@@ -212,6 +212,24 @@ export const StarBackground = ({
       <span className={`${styles.nebula} ${styles.nebulaTwo}`} />
       <span className={`${styles.nebula} ${styles.nebulaThree}`} />
 
+      <div className={styles.solarSystem}>
+        <span className={styles.sun} />
+        {[0, 1, 2, 3].map((index) => (
+          <div
+            key={`orbit-${index}`}
+            className={styles.orbit}
+            style={{
+              "--orbit-inset": `${27 - index * 9}%`,
+              "--orbit-duration": `${80 + index * 45}s`,
+              "--orbit-delay": `${-[12, 51, 94, 157][index]}s`,
+              "--planet-size": `${[12, 23, 38, 19][index]}px`,
+            }}
+          >
+            <span className={`${styles.planet} ${index === 2 ? styles.ringedPlanet : ""}`} />
+          </div>
+        ))}
+      </div>
+
       {/* Petites étoiles */}
       <div className={styles.smallLayer}>
         {smallStars.map((star) => (

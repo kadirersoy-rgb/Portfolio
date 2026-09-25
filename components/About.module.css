@@ -5,7 +5,9 @@
 .about {
   position: relative;
 
-  background: #03030a;
+  background:
+    radial-gradient(ellipse 34vw 16vh at 43% -3vh, rgba(119, 42, 255, 0.6), transparent 78%),
+    #03030a;
 
   scroll-snap-align: start;
   scroll-margin-top: 80px;
@@ -29,13 +31,13 @@
   background:
     radial-gradient(
       circle at 22% 45%,
-      rgba(139, 92, 246, 0.23),
+      rgba(99, 28, 218, 0.2),
       transparent 38%
     ),
 
     radial-gradient(
       circle at 75% 35%,
-      rgba(59, 130, 246, 0.12),
+      rgba(78, 22, 166, 0.12),
       transparent 34%
     ),
 
@@ -51,28 +53,23 @@
 }
 
 
-/* Petites particules très discrètes */
+/* Same fine grain as the Hero, over the pinned content. */
 
-.about::after {
+.aboutViewport::after {
   content: "";
 
   position: absolute;
 
   inset: 0;
 
-  opacity: 0.22;
+  opacity: 0.055;
+  mix-blend-mode: screen;
 
-  background-image:
-    radial-gradient(
-      rgba(255, 255, 255, 0.45) 0.6px,
-      transparent 0.6px
-    );
-
-  background-size: 42px 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23grain)' opacity='.8' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
 
   pointer-events: none;
 
-  z-index: -1;
+  z-index: 4;
 }
 
 
@@ -101,7 +98,6 @@
 
 .aboutContent {
   position: relative;
-  z-index: 1;
 
   width: 100%;
   max-width: 1400px;
@@ -158,8 +154,8 @@
   background:
     radial-gradient(
       circle,
-      rgba(139, 92, 246, 0.32),
-      rgba(139, 92, 246, 0.09) 45%,
+      rgba(99, 28, 218, 0.48),
+      rgba(72, 14, 158, 0.2) 48%,
       transparent 72%
     );
 
@@ -205,16 +201,16 @@
       5.5rem
     );
 
-  font-weight: 500;
+  font-weight: 700;
 
   line-height: 0.95;
 
-  letter-spacing: -4px;
+  letter-spacing: -0.045em;
 }
 
 
 .aboutTitle span {
-  color: #8b5cf6;
+  color: #994bff;
 
   text-shadow:
     0 0 28px
@@ -239,7 +235,7 @@
 
   border-bottom:
     1px solid
-    rgba(255, 255, 255, 0.13);
+    rgba(139, 92, 246, 0.28);
 }
 
 
@@ -258,7 +254,7 @@
   background: transparent;
 
   color:
-    rgba(255, 255, 255, 0.56);
+    #aaa2b8;
 
   font-size: 1rem;
 
@@ -272,8 +268,13 @@
 
 
 .aboutTabs button:hover {
-  color:
-    rgba(255, 255, 255, 0.9);
+  color: #ddd8ea;
+}
+
+.aboutTabs button:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: -4px;
+  border-radius: 12px;
 }
 
 
@@ -306,8 +307,8 @@
     linear-gradient(
       90deg,
       transparent,
-      #a78bfa,
-      #8b5cf6,
+      #b985ff,
+      #8737ff,
       transparent
     );
 
@@ -348,6 +349,7 @@
 
 .aboutTabContent {
   position: relative;
+  isolation: isolate;
 
   width: 100%;
 
@@ -358,10 +360,9 @@
   overflow: hidden;
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.14);
+    1px solid transparent;
 
-  border-radius: 22px;
+  border-radius: 28px;
 
 
   /*
@@ -369,11 +370,8 @@
    */
 
   background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.09),
-      rgba(255, 255, 255, 0.025)
-    );
+    linear-gradient(110deg, #090916 12%, #0c0b20 65%, #191038) padding-box,
+    linear-gradient(125deg, #f0dfff, #8857ff 12%, #555dff 40%, #c69aff 72%, #e8d3ff) border-box;
 
 
   backdrop-filter:
@@ -384,14 +382,11 @@
 
 
   box-shadow:
-    inset 0 1px 0
-      rgba(255, 255, 255, 0.08),
-
-    0 20px 60px
-      rgba(0, 0, 0, 0.28),
-
-    0 0 35px
-      rgba(139, 92, 246, 0.07);
+    inset 0 0 18px rgba(139, 92, 246, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    0 0 7px rgba(185, 133, 255, 0.65),
+    0 0 30px rgba(101, 64, 255, 0.3),
+    0 22px 65px rgba(0, 0, 0, 0.45);
 
 
   /*
@@ -413,25 +408,48 @@
 
   position: absolute;
 
-  right: -10%;
-  top: -40%;
+  right: 0;
+  top: 0;
 
-  width: 65%;
-  height: 110%;
+  width: 60%;
+  height: 100%;
 
   background:
-    radial-gradient(
-      ellipse,
-      rgba(96, 165, 250, 0.13),
-      rgba(139, 92, 246, 0.08) 40%,
-      transparent 72%
-    );
-
-  filter: blur(20px);
+    radial-gradient(circle at 82% 16%, #ede1ff 0 1px, transparent 2px),
+    radial-gradient(circle at 63% 39%, #b995ff 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 61%, #ede1ff 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 82%, #b995ff 0 1px, transparent 2px),
+    radial-gradient(ellipse at 94% 70%, rgba(137, 46, 246, 0.36), transparent 44%),
+    radial-gradient(ellipse at 80% 24%, rgba(65, 86, 255, 0.32), transparent 42%),
+    radial-gradient(ellipse at 100% 42%, rgba(182, 93, 255, 0.27), transparent 32%);
 
   pointer-events: none;
 
   z-index: -1;
+}
+
+.aboutTabContent::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: clamp(55px, 7vw, 100px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 72% 66%, #0a081b 30%, #241049 57%, #6a37ac 78%, #caa5ff 96%);
+  box-shadow: inset 2px 2px 5px #bd8dff88, -5px -3px 20px #8b5cf644;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cardEyebrow {
+  margin: 0 0 12px;
+  color: #c18aff;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 
@@ -441,6 +459,7 @@
 
 .aboutTabContent h3 {
   position: relative;
+  padding-bottom: 18px;
 
   margin:
     0
@@ -456,9 +475,22 @@
       2.5rem
     );
 
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 
   line-height: 1.1;
+}
+
+.aboutTabContent h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b574ff, #ede0ff 40%, #8048ff 65%, transparent);
+  box-shadow: 0 0 9px #a865ff99;
 }
 
 
@@ -480,7 +512,7 @@
     18px;
 
   color:
-    rgba(255, 255, 255, 0.7);
+    #ddd8ea;
 
   font-size: 1rem;
 
@@ -521,17 +553,12 @@
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.11);
+    rgba(157, 121, 255, 0.65);
 
   border-radius: 16px;
 
-  background:
-    rgba(
-      8,
-      8,
-      18,
-      0.32
-    );
+  background: linear-gradient(135deg, rgba(41, 31, 82, 0.65), rgba(10, 10, 28, 0.88));
+  box-shadow: inset 0 1px 0 #d5bdff18, 0 4px 14px #0003;
 
   transition:
     transform 0.3s ease,
@@ -540,12 +567,58 @@
 }
 
 
+.bubbleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.bubbleCard > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.infoCard.bubbleCard h4 {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.infoCard.bubbleCard p {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #c0bad5;
+}
+
+.bubbleCard .cardIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+}
+
+.bubbleCard .cardIcon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.languageFlag {
+  display: block;
+  flex-shrink: 0;
+  width: 60px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px #ffffff24, 0 5px 18px #0005;
+}
+
 .infoCard:hover {
   transform:
     translateY(-3px);
 
   border-color:
-    rgba(139, 92, 246, 0.35);
+    #a78bfa;
 
   background:
     rgba(
@@ -575,7 +648,7 @@
   margin: 0;
 
   color:
-    rgba(255, 255, 255, 0.55);
+    #aaa2b8;
 
   font-size: 0.9rem;
 
@@ -767,4 +840,111 @@
     grid-template-columns: 1fr;
   }
 
+}
+
+.presentationCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+}
+
+.presentationCard > div {
+  min-width: 0;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 48px;
+  border-radius: 15px;
+  color: #a34dff;
+  background: linear-gradient(145deg, #35206b99, #17122fcc);
+  box-shadow: inset 0 1px 0 #b18aff22, 0 3px 12px #0003;
+}
+
+.cardIcon svg {
+  width: 27px;
+  height: 27px;
+}
+
+.infoCard.presentationCard h4 {
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.infoCard.presentationCard p {
+  color: #c0bad5;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .presentationCard { flex-direction: column; align-items: flex-start; }
+}
+
+/* Keep the title and the complete panel inside the pinned viewport. */
+@media (min-width: 769px) {
+  .aboutContent {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    gap: clamp(28px, 4vw, 64px);
+    max-height: 100%;
+  }
+
+  .aboutImage > * {
+    max-width: min(380px, calc((100svh - 180px) * 0.75));
+  }
+
+  .aboutInfo {
+    max-height: calc(100svh - 128px);
+    min-height: 0;
+  }
+
+  .aboutTitle {
+    flex-shrink: 0;
+    font-size: clamp(2.8rem, 6vh, 4rem);
+    margin-bottom: 20px;
+  }
+
+  .aboutTabs {
+    flex-shrink: 0;
+    margin-bottom: 18px;
+  }
+
+  .aboutTabs button { padding: 10px 8px 14px; }
+
+  .aboutTabContent {
+    min-height: 0;
+    padding: 22px 26px;
+    border-radius: 24px;
+    /* Short windows and browser zoom still allow access to all content. */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8b5cf6 transparent;
+  }
+
+  .cardEyebrow { margin-bottom: 8px; }
+
+  .aboutTabContent h3 {
+    font-size: clamp(1.7rem, 3.8vh, 2.2rem);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .aboutDescription p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  .aboutDescription p:last-child { margin-bottom: 0; }
+  .infoCards { margin-top: 18px; gap: 10px; }
+  .presentationCard { padding: 10px; gap: 9px; }
+  .cardIcon { width: 36px; height: 40px; }
+  .cardIcon svg { width: 24px; height: 24px; }
 }

@@ -9,6 +9,7 @@ import {
 
 import styles from "./Hero.module.css";
 import BlurText from "./BlurText";
+import { StarBackground } from "./StarBackground";
 
 export const Hero = ({ cvUrl = "", contactEmail = "kadir.ersoypro@gmail.com" }) => {
 
@@ -39,6 +40,8 @@ export const Hero = ({ cvUrl = "", contactEmail = "kadir.ersoypro@gmail.com" }) 
       ref={heroRef}
       className={styles.hero}
     >
+
+      <StarBackground smallCount={190} bigCount={16} sparkleCount={8} />
 
       <div className={styles.heroContent}>
 
