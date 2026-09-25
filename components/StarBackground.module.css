@@ -16,6 +16,11 @@
   transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.starsWrap[data-variant="quiet"] .solarSystem,
+.starsWrap[data-variant="quiet"] .shootingStar {
+  display: none;
+}
+
 .galaxyBand {
   position: absolute;
   inset: -15%;

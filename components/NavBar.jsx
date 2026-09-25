@@ -29,6 +29,7 @@ export const NavBar = () => {
 
   return (
     <Navbar
+      data-site-header
       expand="lg"
       className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
       data-cursor="dot-only"

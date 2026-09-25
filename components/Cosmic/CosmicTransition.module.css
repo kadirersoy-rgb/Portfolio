@@ -1,0 +1,10 @@
+﻿.transition { position: relative; height: clamp(180px, 26vh, 280px); margin: -50px 0 -50px; pointer-events: none; overflow: hidden; isolation: isolate; background: #03030a; mask-image: linear-gradient(transparent, #000 20%, #000 70%, transparent); }
+.stars { position: absolute; inset: -20px 0; opacity: .7; }
+.nebula { position: absolute; inset: 0; background: radial-gradient(ellipse at 65% 60%, #6227be1c, transparent 60%); }
+.orbit { position: absolute; top: 10%; left: -10%; width: 110%; height: 70%; border: 1px solid #b78bff14; border-radius: 50%; transform: rotate(-12deg); }
+.meteor { position: absolute; top: 20%; left: 24%; width: 85px; height: 1px; background: linear-gradient(90deg, transparent, #d6c5ff); opacity: 0; transform: rotate(22deg); animation: meteorPass 13s linear infinite; }
+.transition[data-active="false"] * { animation-play-state: paused; }
+@keyframes meteorPass { 0%, 84% { opacity: 0; transform: translate(0, 0) rotate(22deg); } 86% { opacity: .5; } 94%, 100% { opacity: 0; transform: translate(240px, 95px) rotate(22deg); } }
+@media (max-width: 768px) { .transition { height: 150px; } .meteor { display: none; } .stars { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .meteor { animation: none; display: none; } }
+@media (prefers-reduced-motion: reduce) { .stars { transform: none !important; } }

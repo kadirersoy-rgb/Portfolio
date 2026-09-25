@@ -14,6 +14,7 @@ export const StarBackground = ({
   bigCount = 22,
   sparkleCount = 12,
   sceneProgress = 0,
+  variant = "default",
   className = "",
 }) => {
   const backgroundRef = useRef(null);
@@ -201,6 +202,7 @@ export const StarBackground = ({
     <div className={styles.skyViewport} aria-hidden="true">
     <div
       ref={backgroundRef}
+      data-variant={variant}
       className={`${styles.starsWrap} ${className}`}
       style={{ "--sky-offset": `${-Math.min(1, Math.max(0, sceneProgress)) * (80 / 180) * 100}%` }}
       aria-hidden="true"

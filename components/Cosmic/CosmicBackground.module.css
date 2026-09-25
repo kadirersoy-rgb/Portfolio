@@ -1,0 +1,22 @@
+﻿.scene { position: absolute; top: -100px; left: 0; right: 0; height: 510px; overflow: hidden; pointer-events: none; z-index: -1; mask-image: linear-gradient(transparent, #000 15%, #000 75%, transparent); }
+.nebula { position: absolute; inset: 0; background: radial-gradient(ellipse at 78% 26%, #7042c830, transparent 42%), radial-gradient(ellipse at 16% 32%, #512c961a, transparent 38%); }
+.stars { position: absolute; inset: -10px 0; opacity: .65; }
+.orbit { position: absolute; width: 95%; height: 230px; left: 16%; top: 45px; border: 1px solid #bb9ce51c; border-radius: 50%; transform: rotate(-14deg); }
+.planet {
+  --diameter: clamp(240px, 26vw, 400px);
+  position: absolute;
+  right: calc(var(--diameter) * -.58);
+  top: 20px;
+  width: var(--diameter);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 24% 26%, #d8c4ff18, transparent 35%),
+    repeating-linear-gradient(155deg, #9476b208 0 2px, transparent 2px 9px),
+    radial-gradient(circle at 85% 64%, #03030a 25%, #121020 50%, #38254d 71%, #8060a9 89%, #d6baff 100%);
+  box-shadow: inset 3px 1px 4px #d6baff66, -4px -1px 20px #8b5cf62e;
+}
+.fade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, #03030a33 48%, #03030ac0 74%, #03030a 94%); }
+@media (max-width: 991px) { .planet { --diameter: 220px; right: -155px; opacity: .6; } .stars { opacity: .5; } }
+@media (max-width: 768px) { .scene { height: 430px; top: -60px; } .planet { display: none; } .stars { opacity: .4; } .orbit { width: 150%; left: -15%; opacity: .6; } .fade { background: linear-gradient(transparent 10%, #03030a80 55%, #03030a 90%); } }
+@media (prefers-reduced-motion: reduce) { .stars, .planet { transform: none !important; } }
