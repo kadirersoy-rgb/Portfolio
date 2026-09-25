@@ -71,19 +71,19 @@ const tabs = [
     cards: [
       {
         title: "Curiosité",
-        text: "Comprendre, explorer et apprendre en continu.",
+        text: "J’aime comprendre le pourquoi, explorer de nouvelles approches et apprendre en continu.",
         icon: FiCompass,
       },
 
       {
         title: "Esprit d’équipe",
-        text: "Partager, collaborer et avancer ensemble.",
+        text: "J’apprécie travailler en projet, confronter les idées et construire des solutions avec les autres.",
         icon: FiUsers,
       },
 
       {
         title: "Résolution de problèmes",
-        text: "Analyser pour construire une réponse concrète.",
+        text: "Analyser une situation, identifier les contraintes et construire une solution claire et adaptée.",
         icon: FiTool,
       },
     ],
@@ -98,18 +98,18 @@ const tabs = [
     cards: [
       {
         title: "Technologie",
-        text: "Découvrir de nouvelles possibilités.",
+        text: "Imaginer le monde de demain avec l'IA.",
         icon: FiCpu,
       },
 
       {
-        title: "Sport",
-        text: "Me dépasser et garder un équilibre.",
+        title: "Le football",
+        text: "Renforcer l'esprit d'équipe et la discipline.",
         icon: FiActivity,
       },
 
       {
-        title: "Voyages",
+        title: "Voyager",
         text: "Explorer et changer de perspective.",
         icon: FiGlobe,
       },
@@ -269,6 +269,22 @@ export const About = () => {
           },
 
         });
+
+      // Fade only after the existing pinned story finishes; no additional pin.
+      const media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.to(viewport.querySelector(`.${styles.aboutContent}`), {
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: () => scrollTriggerRef.current.end,
+            end: () => scrollTriggerRef.current.end + window.innerHeight * 0.7,
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
 
     }, section);
 
