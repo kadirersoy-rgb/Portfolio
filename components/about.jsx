@@ -1,136 +1,354 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import styles from "./About.module.css";
 import { DecorativeImage } from "./DecorativeImage";
+import { StarBackground } from "./StarBackground";
+
+
+/* ==========================================================
+   CONTENU DES ONGLETS
+========================================================== */
+
+const tabs = [
+  {
+    id: "presentation",
+    label: "Présentation",
+
+    title: "Qui suis-je ?",
+
+    paragraphs: [
+      "Étudiant en informatique à l’ESIEE Paris et Software Engineer à la Brasserie Champigneulles, je construis mon parcours entre formation d’ingénieur et expérience en entreprise.",
+
+      "J’aime comprendre, résoudre des problèmes et créer des solutions concrètes. Curieux et motivé, je cherche continuellement à découvrir de nouvelles technologies et à relever de nouveaux défis.",
+    ],
+  },
+
+  {
+    id: "languages",
+    label: "Langues",
+
+    title: "Langues",
+
+    paragraphs: [
+      "Les langues me permettent d’échanger, de découvrir et d’évoluer dans des environnements différents.",
+    ],
+
+    cards: [
+      {
+        title: "Français",
+        text: "Langue maternelle",
+      },
+
+      {
+        title: "Anglais",
+        text: "Niveau professionnel",
+      },
+    ],
+  },
+
+  {
+    id: "softskills",
+    label: "Soft skills",
+
+    title: "Ma façon de travailler.",
+
+    paragraphs: [
+      "Au-delà du développement, j’accorde beaucoup d’importance à la curiosité, à l’échange et à la recherche de solutions.",
+    ],
+
+    cards: [
+      {
+        title: "Curiosité",
+        text: "Comprendre, explorer et apprendre en continu.",
+      },
+
+      {
+        title: "Esprit d’équipe",
+        text: "Partager, collaborer et avancer ensemble.",
+      },
+
+      {
+        title: "Résolution de problèmes",
+        text: "Analyser pour construire une réponse concrète.",
+      },
+    ],
+  },
+
+  {
+    id: "interests",
+    label: "Intérêts",
+
+    title: "Ce qui m’inspire.",
+
+    paragraphs: [
+      "Ma curiosité continue aussi en dehors de l’informatique.",
+    ],
+
+    cards: [
+      {
+        title: "Technologie",
+        text: "Découvrir de nouvelles possibilités.",
+      },
+
+      {
+        title: "Sport",
+        text: "Me dépasser et garder un équilibre.",
+      },
+
+      {
+        title: "Voyages",
+        text: "Explorer et changer de perspective.",
+      },
+    ],
+  },
+];
 
 
 export const About = () => {
 
-  /* Références */
+  /* ==========================================================
+     REFERENCES
+  ========================================================== */
+
   const aboutRef = useRef(null);
+
   const viewportRef = useRef(null);
 
+  const scrollTriggerRef = useRef(null);
 
-  /* Onglet actuellement affiché */
-  const [activeTab, setActiveTab] = useState("presentation");
+  const isTabClickScrolling = useRef(false);
 
 
-  /* Onglets */
-  const tabs = [
-    "presentation",
-    "languages",
-    "softskills",
-    "interests",
-  ];
+  /* ==========================================================
+     ONGLET ACTIF
+  ========================================================== */
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const activeTab = tabs[activeIndex];
+
+
+  /* ==========================================================
+     STORYTELLING GSAP
+  ========================================================== */
 
   useEffect(() => {
 
     const section = aboutRef.current;
+
     const viewport = viewportRef.current;
 
-    if (!section || !viewport) return;
+
+    if (!section || !viewport) {
+      return;
+    }
 
 
-    /* Enregistrement du plugin GSAP */
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(
+      ScrollTrigger,
+      ScrollToPlugin
+    );
 
 
     const total = tabs.length;
 
-    /* Distance entre chaque étape */
-    const stepSize = 1 / (total - 1);
+    const stepSize =
+      total > 1
+        ? 1 / (total - 1)
+        : 1;
 
 
     const ctx = gsap.context(() => {
 
-      ScrollTrigger.create({
+      scrollTriggerRef.current =
+        ScrollTrigger.create({
 
-        /* Section qui déclenche l'animation */
-        trigger: section,
-
-        /* Début juste sous le header */
-        start: "top top+=80",
-
-        /* Distance totale du storytelling */
-        end: () =>
-          `+=${(window.innerHeight - 80) * 3}`,
-
-        /* Bloque réellement le About */
-        pin: viewport,
-
-        /* Conserve l'espace nécessaire dans la page */
-        pinSpacing: true,
-
-        /* Lie l'animation au scroll */
-        scrub: 0.9,
-
-        /* Rend le pin plus fluide */
-        anticipatePin: 1,
-
-        /* Recalcul lors d'un resize */
-        invalidateOnRefresh: true,
+          trigger: section,
 
 
-        /* Calage automatique sur les 4 étapes */
-        snap: {
-          snapTo: (value) =>
-            Math.round(value / stepSize) * stepSize,
+          /* Navbar = environ 80px */
 
-          delay: 0.06,
+          start: "top top+=80",
 
-          duration: {
-            min: 0.22,
-            max: 0.44,
+
+          /* Durée du storytelling */
+
+          end: () =>
+            `+=${(window.innerHeight - 80) * 3}`,
+
+
+          /* Bloque visuellement la section */
+
+          pin: viewport,
+
+          pinSpacing: true,
+
+          scrub: 0.9,
+
+          anticipatePin: 1,
+
+          invalidateOnRefresh: true,
+
+
+          /* Snap vers chaque onglet */
+
+          snap: {
+
+            snapTo: (value) =>
+              Math.round(
+                value / stepSize
+              ) * stepSize,
+
+            delay: 0.06,
+
+            duration: {
+              min: 0.22,
+              max: 0.44,
+            },
+
+            ease: "power2.inOut",
           },
 
-          ease: "power2.inOut",
-        },
+
+          /* Scroll → onglet */
+
+          onUpdate: (self) => {
+
+            if (
+              isTabClickScrolling.current
+            ) {
+              return;
+            }
 
 
-        /* Changement d'onglet selon le scroll */
-        onUpdate: (self) => {
+            const index =
+              Math.round(
+                self.progress *
+                (total - 1)
+              );
 
-          const index = Math.round(
-            self.progress * (total - 1)
-          );
 
-          setActiveTab(tabs[index]);
+            setActiveIndex(index);
+          },
 
-        },
-
-      });
+        });
 
     }, section);
 
 
-    /* Nettoyage GSAP */
-    return () => ctx.revert();
+    ScrollTrigger.refresh();
+
+
+    return () => {
+
+      scrollTriggerRef.current = null;
+
+      ctx.revert();
+
+    };
 
   }, []);
 
 
+  /* ==========================================================
+     CLIC SUR UN ONGLET
+  ========================================================== */
+
+  const handleTabClick = (index) => {
+
+    const trigger =
+      scrollTriggerRef.current;
+
+
+    if (!trigger) {
+      return;
+    }
+
+
+    isTabClickScrolling.current = true;
+
+
+    /*
+     * On change immédiatement
+     * le contenu affiché.
+     */
+
+    setActiveIndex(index);
+
+
+    /*
+     * Conversion de l'index
+     * en progression de scroll.
+     */
+
+    const progress =
+      index / (tabs.length - 1);
+
+
+    const targetScroll =
+      trigger.start +
+      progress *
+      (trigger.end - trigger.start);
+
+
+    gsap.killTweensOf(window);
+
+
+    gsap.to(window, {
+
+      duration: 0.75,
+
+      scrollTo: {
+        y: targetScroll,
+        autoKill: false,
+      },
+
+      ease: "power2.inOut",
+
+      overwrite: true,
+
+
+      onComplete: () => {
+
+        isTabClickScrolling.current = false;
+
+        setActiveIndex(index);
+
+      },
+
+    });
+
+  };
+
+
   return (
+
     <section
       id="about"
       ref={aboutRef}
       className={styles.about}
     >
 
-      {/* Zone réellement bloquée */}
       <div
         ref={viewportRef}
         className={styles.aboutViewport}
       >
 
+        <StarBackground sceneProgress={activeIndex / (tabs.length - 1)} />
+
         <div className={styles.aboutContent}>
 
-          {/* Photo */}
+
+          {/* ==================================================
+              PHOTO
+          ================================================== */}
+
           <div className={styles.aboutImage}>
 
             <DecorativeImage
@@ -141,113 +359,118 @@ export const About = () => {
           </div>
 
 
-          {/* Informations */}
+          {/* ==================================================
+              CONTENU DROIT
+          ================================================== */}
+
           <div className={styles.aboutInfo}>
 
-            {/* Titre */}
+
+            {/* TITRE */}
+
             <h2 className={styles.aboutTitle}>
+
               About <span>me.</span>
+
             </h2>
 
 
-            {/* Onglets */}
+            {/* ONGLETS */}
+
             <div className={styles.aboutTabs}>
 
-              <button
-                className={
-                  activeTab === "presentation"
-                    ? styles.activeTab
-                    : ""
-                }
-              >
-                Présentation
-              </button>
+              {tabs.map((tab, index) => (
 
+                <button
+                  key={tab.id}
+                  type="button"
+                  className={
+                    activeIndex === index
+                      ? styles.activeTab
+                      : ""
+                  }
+                  onClick={() =>
+                    handleTabClick(index)
+                  }
+                >
 
-              <button
-                className={
-                  activeTab === "languages"
-                    ? styles.activeTab
-                    : ""
-                }
-              >
-                Langues
-              </button>
+                  {tab.label}
 
+                </button>
 
-              <button
-                className={
-                  activeTab === "softskills"
-                    ? styles.activeTab
-                    : ""
-                }
-              >
-                Soft skills
-              </button>
-
-
-              <button
-                className={
-                  activeTab === "interests"
-                    ? styles.activeTab
-                    : ""
-                }
-              >
-                Intérêts
-              </button>
+              ))}
 
             </div>
 
 
-            {/* Contenu */}
-            <div className={styles.aboutTabContent}>
+            {/* ==================================================
+                CARTE PRINCIPALE
+            ================================================== */}
 
-              {activeTab === "presentation" && (
-                <>
-                  <h3>Qui suis-je ?</h3>
+            <div
+              key={activeTab.id}
+              className={styles.aboutTabContent}
+            >
 
-                  <p>
-                    Contenu de présentation...
-                  </p>
-                </>
-              )}
-
-
-              {activeTab === "languages" && (
-                <>
-                  <h3>Langues</h3>
-
-                  <p>
-                    Français — langue maternelle
-                  </p>
-
-                  <p>
-                    Anglais — niveau professionnel
-                  </p>
-                </>
-              )}
+              <h3>
+                {activeTab.title}
+              </h3>
 
 
-              {activeTab === "softskills" && (
-                <>
-                  <h3>Soft skills</h3>
+              <div
+                className={
+                  styles.aboutDescription
+                }
+              >
 
-                  <p>
-                    Curiosité, esprit d'équipe,
-                    résolution de problèmes...
-                  </p>
-                </>
-              )}
+                {activeTab.paragraphs?.map(
+                  (paragraph) => (
+
+                    <p key={paragraph}>
+                      {paragraph}
+                    </p>
+
+                  )
+                )}
+
+              </div>
 
 
-              {activeTab === "interests" && (
-                <>
-                  <h3>Intérêts</h3>
+              {/* CARTES INTERNES */}
 
-                  <p>
-                    Technologie, sport, voyage...
-                  </p>
-                </>
+              {activeTab.cards && (
+
+                <div
+                  className={
+                    styles.infoCards
+                  }
+                >
+
+                  {activeTab.cards.map(
+                    (card) => (
+
+                      <div
+                        key={card.title}
+                        className={
+                          styles.infoCard
+                        }
+                      >
+
+                        <h4>
+                          {card.title}
+                        </h4>
+
+                        <p>
+                          {card.text}
+                        </p>
+
+                      </div>
+
+                    )
+                  )}
+
+                </div>
+
               )}
 
             </div>
@@ -259,5 +482,6 @@ export const About = () => {
       </div>
 
     </section>
+
   );
 };

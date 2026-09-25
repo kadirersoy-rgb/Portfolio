@@ -1,6 +1,6 @@
 import {NavBar} from "../components/NavBar"
 import {Hero} from "../components/Hero"
-import {About} from "../components/About"
+import {About} from "../components/about"
 
 export default function Home() {
   return (

@@ -10,7 +10,7 @@ import {
 import styles from "./Hero.module.css";
 import BlurText from "./BlurText";
 
-export const Hero = () => {
+export const Hero = ({ cvUrl = "", contactEmail = "kadir.ersoypro@gmail.com" }) => {
 
   const heroRef = useRef(null);
 
@@ -52,7 +52,7 @@ export const Hero = () => {
           {/* Identité */}
           <div className={styles.identity}>
 
-            <p>Hello, I'm</p>
+            <p>Hello, I&apos;m</p>
 
             <BlurText
               as="h1"
@@ -115,6 +115,36 @@ export const Hero = () => {
                   <span>
                     at Brasserie Champigneulles
                   </span>
+
+                  <div className={styles.heroActions}>
+                    <a
+                      className={styles.cvCta}
+                      href={cvUrl || undefined}
+                      download={cvUrl ? "CV-Kadir-Ersoy.pdf" : undefined}
+                      role={!cvUrl ? "link" : undefined}
+                      aria-disabled={!cvUrl || undefined}
+                      tabIndex={!cvUrl ? 0 : undefined}
+                      title={!cvUrl ? "CV à ajouter" : undefined}
+                    >
+                      Télécharger mon CV
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" />
+                      </svg>
+                    </a>
+                    <a
+                      className={styles.contactCta}
+                      href={contactEmail ? `mailto:${contactEmail}` : undefined}
+                      role={!contactEmail ? "link" : undefined}
+                      aria-disabled={!contactEmail || undefined}
+                      tabIndex={!contactEmail ? 0 : undefined}
+                      title={!contactEmail ? "Adresse e-mail à renseigner" : undefined}
+                    >
+                      Me contacter
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M6 18 18 6M6 6h12v12" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </>
             )}
