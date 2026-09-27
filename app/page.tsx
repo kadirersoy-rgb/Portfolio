@@ -4,6 +4,7 @@ import {About} from "../components/about"
 import {Skills} from "../components/Skills/Skills"
 import CosmicTransition from "../components/Cosmic/CosmicTransition"
 import JourneySection from "../components/Timeline/JourneySection"
+import Projects from "../components/Projects/Projects"
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
       <JourneySection />
       <CosmicTransition />
       <Skills />
+      <CosmicTransition />
+      <Projects />
     </>
   );
 }
