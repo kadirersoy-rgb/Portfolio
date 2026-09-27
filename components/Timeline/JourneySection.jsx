@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll } from "motion/react";
 import { StarBackground } from "../StarBackground";
-import { timelineData } from "./timelineData";
+import { timelineData, formatPeriod } from "./timelineData";
 import styles from "./JourneySection.module.css";
 
 function Logo({ item }) {
@@ -16,7 +16,7 @@ function Experience({ item, reveal }) {
     <motion.li {...reveal} className={styles.experience}>
       <Logo item={item} />
       <div>
-        <div className={styles.meta}><span>{item.type}</span><span>{item.period}</span></div>
+        <div className={styles.meta}><span>{item.type}</span><span>{formatPeriod(item)}</span></div>
         <h4>{item.organization}</h4>
         <p className={styles.role}>{item.role}</p>
         {item.description && <p className={styles.description}>{item.description}</p>}
@@ -50,16 +50,15 @@ export default function JourneySection() {
                 <motion.div {...reveal} className={styles.education}>
                   <div className={styles.chapter}><span>0{index + 1}</span>{period.chapter}</div>
                   <div className={styles.schoolTop}><Logo item={period} />{period.current && <span className={styles.current}>En cours</span>}</div>
-                  <p className={styles.date}>{period.period}</p>
+                  <p className={styles.date}>{formatPeriod(period)}</p>
                   <h3 id={`journey-${period.id}`}>{period.organization}</h3>
                   <p className={styles.degree}>{period.title}</p>
                   <p className={styles.description}>{period.description}</p>
-                  {period.experiences.some(item => item.parallel) && <div className={styles.parallel}><p className={styles.groupLabel}>En parallèle de la formation</p><ul>{period.experiences.filter(item => item.parallel).map(item => <Experience key={item.id} item={item} reveal={reveal} />)}</ul></div>}
                 </motion.div>
               </div>
-              {period.experiences.some(item => !item.parallel) && <div className={styles.branches}>
+              {period.experiences.length > 0 && <div className={styles.branches}>
                 <p className={styles.groupLabel}>{period.current ? "L’entreprise au cœur du cursus" : "Les expériences de cette période"}</p>
-                <ul>{period.experiences.filter(item => !item.parallel).map(item => <Experience key={item.id} item={item} reveal={reveal} />)}</ul>
+                <ul>{period.experiences.map(item => <Experience key={item.id} item={item} reveal={reveal} />)}</ul>
               </div>}
             </article>
           ))}

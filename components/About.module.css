@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    ABOUT
 ========================================================== */
 
@@ -948,3 +948,168 @@
   .cardIcon { width: 36px; height: 40px; }
   .cardIcon svg { width: 24px; height: 24px; }
 }
+
+/* Method cards and illustrated interests share the panel, not their visual hierarchy. */
+.panelIntro { color: #c9c1dc; font-size: .9rem; line-height: 1.6; margin: 0; }
+.methodPanel::before { opacity: .3; }
+.methodPanel::after { opacity: .2; }
+.editorialCard { position: relative; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 14px; padding: 18px 15px; min-width: 0; overflow: hidden; }
+.editorialCard > div:not(.interestVisual) { width: 100%; }
+.editorialCard .cardIcon { width: 48px; height: 48px; border: 1px solid #9b68ec77; border-radius: 14px; background: radial-gradient(circle at 15% 0, #8744d966, #1a1236 75%); box-shadow: inset 0 1px 2px #ddbeff55, 0 0 18px #8b5cf620; transition: transform .25s; }
+.editorialCard h4 { font-size: 1rem; line-height: 1.35; }
+.editorialCard p { color: #c3bad4; font-size: .82rem; line-height: 1.65; }
+.cardSubtitle { display: block; color: #b782ff; font-size: .78rem; font-weight: 600; margin: -2px 0 8px; }
+.cardFooter { margin-top: auto; padding: 10px 0 0; border-top: 1px solid #9b68ec40; width: 100%; font-size: .66rem; line-height: 1.5; color: #d6c4f2; }
+.interestPanel .editorialCard { background: linear-gradient(155deg, #131026, #090912); gap: 9px; }
+.interestVisual { position: relative; width: calc(100% + 30px); margin: -18px -15px -28px; height: 122px; flex-shrink: 0; color: #b898ff; background: radial-gradient(ellipse at 50% 40%, #6336ab55, transparent 70%); }
+.interestVisual svg { width: 100%; height: 100%; transition: transform .5s; }
+.football { color: #99c9df; background: radial-gradient(ellipse at 50% 40%, #3e597f66, transparent 70%); }
+.travel { color: #d8a2ec; background: radial-gradient(ellipse at 75% 30%, #824b9466, transparent 75%); }
+.technology { color: #b398ff; }
+.interestPanel .cardIcon { position: relative; width: 38px; height: 38px; border-radius: 11px; }
+.interestPanel .cardIcon svg { width: 22px; height: 22px; }
+.interestPanel .cardFooter { border: 1px solid #8b5cf644; background: #8b5cf60b; border-radius: 20px; padding: 7px 9px; }
+@media (hover: hover) { .editorialCard:hover { transform: translateY(-4px); background: linear-gradient(135deg, #251b41, #0c0b1b); border-color: #be91ff; } .editorialCard:hover .cardIcon { transform: scale(1.05); } .editorialCard:hover .interestVisual svg { transform: translateY(-3px); } }
+@media (min-width: 769px) and (max-width: 1100px) { .editorialCard { padding: 14px 10px; } .editorialCard h4 { font-size: .88rem; } .editorialCard p { font-size: .76rem; } .interestVisual { width: calc(100% + 20px); margin: -14px -10px -25px; height: 100px; } }
+@media (max-width: 768px) { .editorialCard { padding: 20px; } .interestVisual { height: 160px; width: calc(100% + 40px); margin: -20px -20px -30px; } .editorialCard p { font-size: .9rem; } .cardFooter { font-size: .75rem; } }
+@media (prefers-reduced-motion: reduce) { .aboutTabContent { animation: none; } .editorialCard, .editorialCard .cardIcon, .interestVisual svg { transition: none; transform: none !important; } }
+
+/* Interests remain fully visible: compact the content instead of scrolling the panel. */
+.aboutTabContent.interestPanel { overflow: visible; flex-shrink: 0; }
+.interestPanel .infoCards { margin-top: 12px; }
+.interestPanel .editorialCard { padding: 12px; gap: 7px; }
+.interestPanel .interestVisual { width: calc(100% + 24px); margin: -12px -12px -22px; height: clamp(60px, 11svh, 105px); }
+.interestPanel .editorialCard h4 { margin-bottom: 5px; }
+.interestPanel .editorialCard p { line-height: 1.45; }
+.interestPanel .cardSubtitle { margin-bottom: 5px; }
+.interestPanel .cardFooter { padding: 5px 7px; }
+@media (min-width: 769px) and (max-height: 800px) {
+  .aboutContent:has(.interestPanel) { grid-template-columns: minmax(0, .3fr) minmax(0, .7fr); padding-block: 12px; }
+  .aboutInfo:has(.interestPanel) .aboutTitle { margin-bottom: 12px; font-size: 2.8rem; }
+  .aboutInfo:has(.interestPanel) .aboutTabs { margin-bottom: 12px; }
+  .aboutTabContent.interestPanel { padding: 16px 20px; }
+  .interestPanel h3 { margin-bottom: 10px; padding-bottom: 9px; font-size: 1.7rem; }
+  .interestPanel .panelIntro { font-size: .82rem; }
+  .interestPanel .cardIcon { width: 30px; height: 30px; }
+  .interestPanel .editorialCard p { font-size: .76rem; }
+}
+@media (max-width: 768px) {
+  .aboutTabContent.interestPanel { padding: 18px 16px; }
+  .interestPanel h3 { font-size: 1.7rem; margin-bottom: 10px; padding-bottom: 10px; }
+  .interestPanel .panelIntro { font-size: .8rem; }
+  .interestPanel .infoCards { gap: 9px; }
+  .interestPanel .editorialCard { display: grid; grid-template-columns: 55px minmax(0, 1fr); gap: 5px 10px; padding: 10px; }
+  .interestPanel .interestVisual { grid-column: 1; grid-row: 1 / 3; width: 55px; height: 70px; margin: 0; align-self: center; }
+  .interestPanel .interestVisual svg { width: 100px; max-width: none; margin-left: -22px; }
+  .interestPanel .cardIcon { display: none; }
+  .interestPanel .editorialCard > div:not(.interestVisual) { grid-column: 2; }
+  .interestPanel .editorialCard h4 { font-size: .9rem; margin-bottom: 3px; }
+  .interestPanel .editorialCard p { font-size: .75rem; line-height: 1.4; }
+  .interestPanel .cardSubtitle { font-size: .72rem; margin-bottom: 3px; }
+  .interestPanel .cardFooter { grid-column: 2; font-size: .63rem; padding: 3px 6px; }
+}
+@media (max-width: 768px) {
+  .aboutInfo:has(.interestPanel) .aboutTitle { font-size: 2.6rem; margin-bottom: 14px; }
+  .aboutInfo:has(.interestPanel) .aboutTabs { margin-bottom: 12px; gap: 16px; }
+  .aboutInfo:has(.interestPanel) .aboutTabs button { font-size: .82rem; padding-block: 8px 12px; }
+}
+@media (max-width: 360px) {
+  .interestPanel .editorialCard { grid-template-columns: minmax(0, 1fr); }
+  .interestPanel .interestVisual { display: none; }
+  .interestPanel .editorialCard > div:not(.interestVisual), .interestPanel .cardFooter { grid-column: 1; }
+}
+
+/* A connected three-step method, rather than three identical glass tiles. */
+.aboutTabContent.methodPanel { overflow: visible; flex-shrink: 0; }
+.methodPanel .infoCards { counter-reset: method; gap: 0; margin-top: 18px; border-top: 1px solid #a879ef55; }
+.methodPanel .editorialCard { counter-increment: method; border: 0; border-radius: 0; padding: 20px 16px 12px; background: linear-gradient(180deg, #8b5cf612, transparent 80%); box-shadow: none; gap: 14px; overflow: visible; }
+.methodPanel .editorialCard + .editorialCard { border-left: 1px solid #a879ef2b; }
+.methodPanel .editorialCard::before { content: counter(method, decimal-leading-zero); position: absolute; top: 18px; right: 15px; font-size: 1.8rem; font-weight: 300; letter-spacing: -.06em; color: #b395de66; }
+.methodPanel .editorialCard::after { content: ''; position: absolute; top: -4px; left: 30px; width: 7px; height: 7px; border-radius: 50%; background: #c69aff; box-shadow: 0 0 12px #9860ff77; }
+.methodPanel .cardIcon { border-radius: 50%; width: 46px; height: 46px; background: radial-gradient(circle at 30% 20%, #7040af44, #100d20); border-color: #a879ef66; }
+.methodPanel .editorialCard h4 { font-size: .98rem; margin-bottom: 8px; }
+.methodPanel .editorialCard p { font-size: .8rem; line-height: 1.5; }
+.methodPanel .cardFooter { border-top: 0; border-left: 2px solid #a879ef88; padding: 2px 0 2px 8px; color: #c6b4e3; }
+@media (hover: hover) { .methodPanel .editorialCard:hover { transform: translateY(-3px); background: linear-gradient(180deg, #8b5cf625, transparent); } .methodPanel .editorialCard:hover::before { color: #d5b7ff; } }
+@media (min-width: 769px) and (max-height: 800px) {
+  .aboutContent:has(.methodPanel) { grid-template-columns: minmax(0, .3fr) minmax(0, .7fr); padding-block: 12px; }
+  .aboutInfo:has(.methodPanel) .aboutTitle { margin-bottom: 12px; font-size: 2.8rem; }
+  .aboutInfo:has(.methodPanel) .aboutTabs { margin-bottom: 12px; }
+  .aboutTabContent.methodPanel { padding: 16px 20px; }
+  .methodPanel h3 { margin-bottom: 10px; padding-bottom: 9px; font-size: 1.7rem; }
+  .methodPanel .panelIntro { font-size: .82rem; }
+  .methodPanel .editorialCard { padding: 16px 12px 8px; gap: 10px; }
+  .methodPanel .editorialCard p { font-size: .76rem; }
+}
+@media (max-width: 768px) {
+  .aboutTabContent.methodPanel { padding: 18px 16px; }
+  .aboutInfo:has(.methodPanel) .aboutTitle { font-size: 2.6rem; margin-bottom: 14px; }
+  .aboutInfo:has(.methodPanel) .aboutTabs { margin-bottom: 12px; gap: 16px; }
+  .aboutInfo:has(.methodPanel) .aboutTabs button { font-size: .82rem; padding-block: 8px 12px; }
+  .methodPanel h3 { font-size: 1.7rem; margin-bottom: 10px; padding-bottom: 10px; }
+  .methodPanel .panelIntro { font-size: .8rem; }
+  .methodPanel .infoCards { border-top: 0; border-left: 1px solid #a879ef55; margin-left: 3px; }
+  .methodPanel .editorialCard { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 6px 10px; padding: 12px 8px 12px 16px; }
+  .methodPanel .editorialCard + .editorialCard { border-left: 0; border-top: 1px solid #a879ef22; }
+  .methodPanel .editorialCard::after { top: 25px; left: -4px; }
+  .methodPanel .editorialCard::before { font-size: .68rem; top: 54px; left: 26px; right: auto; }
+  .methodPanel .cardIcon { width: 34px; height: 34px; }
+  .methodPanel .cardIcon svg { width: 20px; height: 20px; }
+  .methodPanel .editorialCard h4 { font-size: .9rem; margin-bottom: 5px; }
+  .methodPanel .editorialCard p { font-size: .76rem; }
+  .methodPanel .cardFooter { grid-column: 2; font-size: .65rem; }
+}
+
+/* Reference composition: orbit icons, luminous cards and numbered headers. */
+.methodAccent { color: #ffffff; }
+.methodPanel .infoCards { border: 0; gap: 12px; margin-left: 0; }
+.methodPanel .editorialCard, .methodPanel .editorialCard + .editorialCard { border: 1px solid #ab7bf5aa; border-radius: 18px; padding: 18px 14px 14px; background: radial-gradient(ellipse at 5% 0, #713be742, transparent 50%), linear-gradient(145deg, #15112c, #0a081b); box-shadow: inset 0 1px 1px #ead7ff66, inset 0 -10px 24px #6730c41c; gap: 16px; }
+.methodPanel .editorialCard::before { top: 20px; right: 14px; left: auto; font-size: 2rem; color: #b18ade88; }
+.methodPanel .editorialCard::after { top: 43px; left: 45%; width: 24%; height: 1px; border-radius: 0; background: linear-gradient(90deg, #8b5cf600, #b471ff); box-shadow: 0 0 7px #a45aff66; }
+.methodPanel .cardIcon { position: relative; width: 52px; height: 52px; border-radius: 15px; border: 1px solid #c295ff; color: #c286ff; background: radial-gradient(circle at 0 0, #9f56fa99, #291247aa 65%); box-shadow: inset 0 0 14px #a357ff55, 0 0 15px #9650ff55; }
+.methodPanel .cardIcon::after { content: ''; position: absolute; inset: 12px -17px; border: 1px solid #b578f877; border-radius: 50%; transform: rotate(-30deg); pointer-events: none; }
+.methodPanel .cardIcon svg { width: 29px; height: 29px; }
+.methodPanel .editorialCard h4 { font-weight: 700; font-size: 1.02rem; letter-spacing: -.025em; }
+.methodPanel .cardFooter { display: flex; align-items: center; gap: 7px; border: 1px solid #a575ee99; padding: 7px 8px; border-radius: 30px; background: linear-gradient(110deg, #7033c333, #21103977); box-shadow: inset 0 0 9px #a158ff22; color: #eee4ff; font-size: .62rem; }
+.methodPanel .cardFooter > svg { width: 18px; height: 18px; flex-shrink: 0; color: #ba7fff; }
+.methodPanel::after { opacity: .7; }
+@media (hover: hover) { .methodPanel .editorialCard:hover { background: radial-gradient(ellipse at 5% 0, #713be75c, transparent 60%), #100c23; box-shadow: inset 0 1px 1px #ead7ff88, 0 0 18px #8b5cf622; } }
+@media (min-width: 769px) and (max-height: 800px) { .methodPanel .editorialCard { padding: 14px 10px 10px; gap: 12px; } .methodPanel .cardIcon { width: 44px; height: 44px; } .methodPanel .editorialCard::after { top: 36px; } .methodPanel .editorialCard::before { top: 14px; } .methodPanel .cardFooter { gap: 4px; padding: 5px; font-size: .58rem; } }
+@media (max-width: 768px) { .methodPanel .editorialCard { grid-template-columns: 42px minmax(0, 1fr); gap: 8px 12px; padding: 14px 12px; } .methodPanel .cardIcon { width: 38px; height: 38px; border-radius: 11px; } .methodPanel .cardIcon svg { width: 23px; height: 23px; } .methodPanel .editorialCard::before { top: 61px; left: 18px; right: auto; font-size: 1.15rem; } .methodPanel .editorialCard::after { display: none; } .methodPanel .cardFooter { font-size: .62rem; } .methodPanel .editorialCard h4 { font-size: .95rem; } }
+
+/* Laser highlights follow the hovered card, without changing its layout. */
+.methodPanel .cardIcon::after,
+.methodPanel .editorialCard::after,
+.methodPanel .cardFooter {
+  transition: border-color .22s ease, box-shadow .22s ease, background-color .22s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .methodPanel .editorialCard:hover .cardIcon::after {
+    border-color: #efd9ff;
+    box-shadow: 0 0 3px #fff0ff, 0 0 9px #b363ff, 0 0 18px #8b35ff99, inset 0 0 5px #bf7aff66;
+  }
+  .methodPanel .editorialCard:hover::after {
+    background: #efd9ff;
+    box-shadow: 0 0 3px #fff0ff, 0 0 8px #c381ff, 0 0 17px #943cff;
+  }
+  .methodPanel .editorialCard:hover .cardFooter {
+    border-color: #e4baff;
+    box-shadow: 0 0 3px #e9c7ff, 0 0 10px #a855f788, inset 0 0 8px #b46aff44;
+    background-color: #8b5cf612;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .methodPanel .cardIcon::after,
+  .methodPanel .editorialCard::after,
+  .methodPanel .cardFooter { transition: none; }
+}
+
+.interestOrbit { opacity: .35; transition: opacity .22s ease, stroke .22s ease, filter .22s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .interestPanel .editorialCard:hover .interestOrbit {
+    opacity: 1;
+    stroke: #efd9ff;
+    filter: drop-shadow(0 0 2px #fff0ff) drop-shadow(0 0 5px #b363ff) drop-shadow(0 0 9px #8b35ff);
+  }
+}
+@media (prefers-reduced-motion: reduce) { .interestOrbit { transition: none; } }

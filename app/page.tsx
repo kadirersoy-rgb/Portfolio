@@ -11,6 +11,7 @@ export default function Home() {
       <NavBar />
       <Hero />
       <About />
+      <CosmicTransition />
       <JourneySection />
       <CosmicTransition />
       <Skills />

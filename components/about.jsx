@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -10,7 +10,7 @@ import styles from "./About.module.css";
 import { DecorativeImage } from "./DecorativeImage";
 import { StarBackground } from "./StarBackground";
 import { FaGraduationCap } from "react-icons/fa";
-import { FiBriefcase, FiZap, FiCompass, FiUsers, FiTool, FiCpu, FiActivity, FiGlobe } from "react-icons/fi";
+import { FiBriefcase, FiZap, FiCompass, FiUsers, FiSettings, FiBookOpen, FiBarChart2, FiCpu, FiActivity, FiGlobe } from "react-icons/fi";
 
 
 /* ==========================================================
@@ -67,24 +67,31 @@ const tabs = [
     label: "Soft skills",
 
     title: "Ma façon de travailler.",
+    intro: "Comprendre, collaborer et structurer des solutions concrètes.",
 
     cards: [
       {
         title: "Curiosité",
         text: "J’aime comprendre le pourquoi, explorer de nouvelles approches et apprendre en continu.",
         icon: FiCompass,
+        footer: "Veille & apprentissage",
+        footerIcon: FiBookOpen,
       },
 
       {
         title: "Esprit d’équipe",
         text: "J’apprécie travailler en projet, confronter les idées et construire des solutions avec les autres.",
         icon: FiUsers,
+        footer: "Collaboration en projet",
+        footerIcon: FiUsers,
       },
 
       {
-        title: "Résolution de problèmes",
-        text: "Analyser une situation, identifier les contraintes et construire une solution claire et adaptée.",
-        icon: FiTool,
+        title: "Esprit d’analyse",
+        text: "Analyser une situation, identifier les contraintes et transformer un besoin en solution concrète.",
+        icon: FiSettings,
+        footer: "Structuration & résolution",
+        footerIcon: FiBarChart2,
       },
     ],
   },
@@ -94,29 +101,45 @@ const tabs = [
     label: "Intérêts",
 
     title: "Ce qui m’inspire.",
+    intro: "Ce qui nourrit ma curiosité au-delà de l’informatique.",
 
     cards: [
       {
         title: "Technologie",
-        text: "Imaginer le monde de demain avec l'IA.",
+        text: "Explorer l’IA, les outils numériques et les innovations qui façonnent demain.",
+        visual: "technology", subtitle: "Imaginer le futur", footer: "Curiosité & innovation",
         icon: FiCpu,
       },
 
       {
-        title: "Le football",
-        text: "Renforcer l'esprit d'équipe et la discipline.",
+        title: "Football",
+        text: "Le sport m’apporte discipline, régularité et sens du collectif.",
+        visual: "football", subtitle: "Esprit de compétition", footer: "Discipline & équipe",
         icon: FiActivity,
       },
 
       {
-        title: "Voyager",
-        text: "Explorer et changer de perspective.",
+        title: "Voyage",
+        text: "Explorer de nouveaux lieux et de nouvelles cultures pour élargir ma vision du monde.",
+        visual: "travel", subtitle: "Découvrir autrement", footer: "Ouverture & perspective",
         icon: FiGlobe,
       },
     ],
   },
 ];
 
+
+function InterestVisual({ kind }) {
+  return <div className={`${styles.interestVisual} ${styles[kind]}`} aria-hidden="true">
+    <svg viewBox="0 0 300 150" focusable="false">
+      <g fill="none" stroke="currentColor" strokeWidth="1">{kind !== "travel" && <ellipse className={styles.interestOrbit} cx="150" cy="90" rx="130" ry="38" transform="rotate(-15 150 90)" />}<path opacity=".35" d="M25 32h3m50-12h3m172 18h3M40 125h3m210-13h3" /></g>
+      {kind === "technology" && <g stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><path fill="#100d29" d="m98 27 110 12-15 76-110-12z" /><path fill="#27204c" d="m83 103 110 12 39 17-134-8-40-16z" /><path fill="none" d="m120 60-13 9 10 12m49-19 13 12-17 8m-20-29-10 36" /><path opacity=".4" d="M47 52h26M43 60h25M221 78h28M218 86h24" /></g>}
+      {kind === "football" && <g stroke="currentColor" strokeWidth="2"><path fill="none" opacity=".3" d="m40 140 35-90h150l35 90M150 50v90M55 104h190" /><circle cx="150" cy="72" r="48" fill="#18132e" /><path fill="#483176" d="m150 48 24 17-9 28h-30l-9-28z" /><path fill="none" d="m150 48-4-23m28 40 23-4m-32 32 15 17m-45-17-16 17m7-45-22-7" /><path opacity=".6" d="M25 25 75 45m200-20-50 20" /></g>}
+      {kind === "travel" && <g stroke="currentColor" strokeLinejoin="round"><circle cx="216" cy="40" r="25" fill="#392051" /><path fill="#15102a" d="m0 137 64-80 43 50 43-75 79 105z" /><path fill="#2d2044" d="m0 150 68-53 28 30 66-60 55 63 36-43 47 63z" /><path fill="none" opacity=".7" d="m127 150 37-30-13-9 19-17M45 81l19-24 20 23-20-9z" /></g>}
+      {kind === "travel" && <ellipse className={styles.interestOrbit} fill="none" stroke="currentColor" strokeWidth="1" cx="150" cy="90" rx="130" ry="38" transform="rotate(-15 150 90)" />}
+    </svg>
+  </div>;
+}
 
 const LanguageFlag = ({ country }) => (
   <svg className={styles.languageFlag} viewBox="0 0 60 40" aria-hidden="true" focusable="false">
@@ -196,6 +219,8 @@ export const About = () => {
 
 
     const ctx = gsap.context(() => {
+      const desktop = gsap.matchMedia();
+      desktop.add("(min-width: 769px)", () => {
 
       scrollTriggerRef.current =
         ScrollTrigger.create({
@@ -286,6 +311,8 @@ export const About = () => {
         });
       });
 
+      return () => { scrollTriggerRef.current = null; };
+      });
     }, section);
 
 
@@ -314,6 +341,7 @@ export const About = () => {
 
 
     if (!trigger) {
+      setActiveIndex(index);
       return;
     }
 
@@ -456,7 +484,7 @@ export const About = () => {
 
             <div
               key={activeTab.id}
-              className={styles.aboutTabContent}
+              className={`${styles.aboutTabContent} ${activeTab.id === "softskills" ? styles.methodPanel : activeTab.id === "interests" ? styles.interestPanel : ""}`}
             >
 
               <p className={styles.cardEyebrow}>
@@ -464,7 +492,7 @@ export const About = () => {
               </p>
 
               <h3>
-                {activeTab.title}
+                {activeTab.id === "softskills" ? <>Ma façon de <span className={styles.methodAccent}>travailler.</span></> : activeTab.title}
               </h3>
 
 
@@ -487,6 +515,7 @@ export const About = () => {
               </div>
 
 
+              {activeTab.intro && <p className={styles.panelIntro}>{activeTab.intro}</p>}
               {/* CARTES INTERNES */}
 
               {activeTab.cards && (
@@ -503,10 +532,11 @@ export const About = () => {
                       <div
                         key={card.title}
                         className={
-                          `${styles.infoCard} ${activeTab.id === "presentation" ? styles.presentationCard : styles.bubbleCard}`
+                          `${styles.infoCard} ${activeTab.id === "presentation" ? styles.presentationCard : activeTab.id === "languages" ? styles.bubbleCard : styles.editorialCard}`
                         }
                       >
 
+                        {card.visual && <InterestVisual kind={card.visual} />}
                         {card.flag && <LanguageFlag country={card.flag} />}
                         {card.icon && (
                           <span className={styles.cardIcon} aria-hidden="true">
@@ -520,9 +550,16 @@ export const About = () => {
                         </h4>
 
                         <p>
+                          {card.subtitle && <strong className={styles.cardSubtitle}>{card.subtitle}</strong>}
                           {card.text}
                         </p>
                         </div>
+
+                        {card.footer && <span className={styles.cardFooter}>
+                          {card.footerIcon && <card.footerIcon aria-hidden="true" />}
+                          <span>{card.footer}</span>
+
+                        </span>}
 
                       </div>
 
